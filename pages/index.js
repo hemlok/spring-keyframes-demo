@@ -35,14 +35,22 @@ const vaultTheme = {
   text: '#000000',
 }
 
+const Hero = styled(Column)`
+  margin-top: 10vh;
+`
+
+const Hemlok = styled('img')`
+  margin: 100px 0;
+`
+
 export default () => (
   <ThemeProvider theme={styleguide.colors}>
     <Background>
       <Layout>
-        <Column align="start">
+        <Hero align="start">
           <Text> UI Designer & Engineer </Text>
-          <img src="/static/hemlok.svg" alt="hemlok" />
-        </Column>
+          <Hemlok src="/static/hemlok.svg" alt="hemlok" />
+        </Hero>
         <ListTitle title="Products" />
         <Card title="scoops" link="scoops.io" theme={scoopsTheme} />
         <Card title="battlefy" link="battlefy.com" theme={battlefyTheme} />
