@@ -12,6 +12,8 @@ export default styled('p')`
   font-family: ${props => (props.serif ? font.serif : font.sansSerif)};
   margin: 0;
   font-weight: ${props => weight(props)};
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   ${props =>
     props.serif &&
     css`

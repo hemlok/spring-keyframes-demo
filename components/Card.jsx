@@ -8,6 +8,12 @@ const Card = styled(Column)`
   padding: ${styleguide.spacing.large};
   width: 100%;
   margin-bottom: ${styleguide.spacing.medium};
+  transition: all 300ms ease;
+  cursor: ${props => (props.onClick ? 'pointer' : 'auto')};
+  &:hover {
+    transform: translateX(8px);
+    /* filter: saturate(0); */
+  }
 `
 
 const Title = styled(Text)`
