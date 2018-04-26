@@ -1,7 +1,7 @@
 import { css } from 'react-emotion'
 
 export const colors = {
-  text: '#000000',
+  text: '#404040',
   background: '#FFF3F3',
   forground: '#ffffff',
 }

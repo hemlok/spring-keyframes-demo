@@ -1,9 +1,27 @@
 import React from 'react'
-import styled from 'react-emotion'
+import Link from 'next/link'
 import { ThemeProvider } from 'emotion-theming'
-
+import styled, { hydrate, injectGlobal } from 'react-emotion'
 import { Layout, Text, Column, styleguide } from '../components/styleguide'
 import { ListTitle, Card } from '../components'
+
+// Adds server generated styles to emotion cache.
+// '__NEXT_DATA__.ids' is set in '_document.js'
+if (typeof window !== 'undefined') {
+  hydrate(window.__NEXT_DATA__.ids)
+}
+
+injectGlobal`
+  html, body {
+    margin: 0;
+    background: ${styleguide.colors.background};
+    font-family: Futura, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+  }
+  * {
+    box-sizing: border-box;
+  }
+`
 
 const Background = styled('div')`
   background-color: ${props => props.theme.background};
@@ -51,11 +69,12 @@ export default () => (
           <Text> UI Designer & Engineer </Text>
           <Hemlok src="/static/hemlok.svg" alt="hemlok" />
         </Hero>
-        <ListTitle title="Products" />
+        <ListTitle title="Work" />
         <Card title="scoops" link="scoops.io" theme={scoopsTheme} />
-        <Card title="battlefy" link="battlefy.com" theme={battlefyTheme} />
+        <Link href="/battlefy" prefetch>
+          <Card title="battlefy" link="battlefy.com" theme={battlefyTheme} />
+        </Link>
         <Card title="vault" link="vault.crucible.gg" theme={vaultTheme} />
-        <ListTitle title="UI" />
         <Card title="goodlord" link="goodlord.co" theme={goodlordTheme} />
         <ListTitle title="Libraries" />
         <Card

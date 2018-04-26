@@ -14,10 +14,10 @@ const Title = styled(Text)`
   margin-bottom: ${styleguide.spacing.medium};
 `
 
-export default ({ theme, title, link }) => {
+export default ({ theme, title, link, onClick }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Card justify="start" align="start">
+      <Card justify="start" align="start" onClick={onClick}>
         <Title primary serif size="title">
           {title}
         </Title>
