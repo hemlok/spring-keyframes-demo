@@ -10,8 +10,9 @@ const Card = styled(Column)`
   margin-bottom: ${styleguide.spacing.medium};
   transition: all 300ms ease;
   cursor: ${props => (props.onClick ? 'pointer' : 'auto')};
+
   &:hover {
-    transform: translateX(8px);
+    transform: scale3d(1.02, 1.02, 1);
     /* filter: saturate(0); */
   }
 `

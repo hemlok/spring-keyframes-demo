@@ -31,26 +31,31 @@ const Background = styled('div')`
 
 const battlefyTheme = {
   background: '#151B27',
-  primary: '#EB2B44',
+  primary: styleguide.colors.backgroundLight,
   text: '#FFFFFF',
 }
 
-const scoopsTheme = {
-  background: '#FFFFFF',
-  primary: '#FF6639',
+const uiTheme = {
+  background: '#3232CC',
+  primary: styleguide.colors.backgroundLight,
   text: '#000000',
 }
 
 const goodlordTheme = {
   background: '#27363A',
-  primary: '#34D9C3',
+  primary: styleguide.colors.backgroundLight,
   text: '#000000',
 }
 
 const vaultTheme = {
-  background: '#FFFFFF',
-  primary: '#646464',
+  background: '#424242',
+  primary: styleguide.colors.backgroundLight,
   text: '#000000',
+}
+
+const writingTheme = {
+  background: styleguide.colors.forground,
+  primary: styleguide.colors.primary,
 }
 
 const Hero = styled(Column)`
@@ -60,6 +65,30 @@ const Hero = styled(Column)`
 const Hemlok = styled('img')`
   margin: 100px 0;
 `
+const sized = {
+  large: '400px',
+  small: '150px',
+  medium: '200px',
+}
+
+const circleSize = ({ size }) => sized[size]
+
+const Circle = styled('div')`
+  border-radius: 100%;
+  background-color: ${styleguide.colors.primary};
+  width: ${props => circleSize};
+  height: ${props => circleSize};
+  z-index: 0;
+  position: absolute;
+`
+
+const Bg = () => (
+  <div>
+    <Circle size="large" style={{ left: '-20%', top: '50px' }} />
+    <Circle size="small" style={{ right: '-40px', top: '-40px' }} />
+    <Circle size="medium" style={{ right: '-20px', top: '300px' }} />
+  </div>
+)
 
 export default () => (
   <ThemeProvider theme={styleguide.colors}>
@@ -69,18 +98,26 @@ export default () => (
           <Text> UI Designer & Engineer </Text>
           <Hemlok src="/static/hemlok.svg" alt="hemlok" />
         </Hero>
-        <ListTitle title="Work" />
-        <Card title="scoops" link="scoops.io" theme={scoopsTheme} />
-        <Link href="/battlefy" prefetch>
-          <Card title="battlefy" link="battlefy.com" theme={battlefyTheme} />
-        </Link>
-        <Card title="vault" link="vault.crucible.gg" theme={vaultTheme} />
-        <Card title="goodlord" link="goodlord.co" theme={goodlordTheme} />
+        <ListTitle
+          title="Product"
+          style={{ position: 'relative', zIndex: 1 }}
+        />
+        <div style={{ position: 'relative' }}>
+          <Bg />
+          <Card title="scoops" link="scoops.io" theme={uiTheme} />
+          <Link href="/battlefy" prefetch>
+            <Card title="battlefy" link="battlefy.com" theme={uiTheme} />
+          </Link>
+          <Card title="vault" link="vault.crucible.gg" theme={uiTheme} />
+        </div>
+        <ListTitle title="UI" />
+        <Card title="goodlord" link="goodlord.co" theme={writingTheme} />
+
         <ListTitle title="Libraries" />
         <Card
           title="spring-keyframes"
           link="github.com/hemlok/spring-keyframes"
-          theme={vaultTheme}
+          theme={writingTheme}
         />
       </Layout>
     </Background>

@@ -6,9 +6,9 @@ const List = styled(Column)`
   margin-top: ${styleguide.spacing.large};
 `
 
-export default ({ title }) => (
-  <List align="start">
-    <Text> {title} </Text>
-    <Divider />
+export default ({ title, style }) => (
+  <List align="start" style={style}>
+    <Text black> {title} </Text>
+    <Divider black />
   </List>
 )

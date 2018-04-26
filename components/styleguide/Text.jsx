@@ -3,8 +3,8 @@ import { colors, text, font } from './styleguide'
 
 const size = size => (size ? text[size] : text.paragraph)
 const weight = ({ light, serif }) => (serif ? '700' : light ? 'book' : 'medium')
-const color = ({ onBlack, primary, theme }) =>
-  primary ? theme.primary : onBlack ? colors.forground : theme.text
+const color = ({ black, primary, theme }) =>
+  primary ? theme.primary : black ? colors.black : theme.text
 
 export default styled('p')`
   color: ${props => color(props)};

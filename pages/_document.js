@@ -30,6 +30,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content={styleguide.colors.background} />
           <style> @import url('https://use.typekit.net/jin5auh.css');</style>
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
+          <title> hemlok </title>
         </Head>
         <body>
           <Main />
