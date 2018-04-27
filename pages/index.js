@@ -23,12 +23,6 @@ injectGlobal`
   }
 `
 
-const Background = styled('div')`
-  background-color: ${props => props.theme.background};
-  width: 100%;
-  min-height: 100vh;
-`
-
 const battlefyTheme = {
   background: '#151B27',
   primary: styleguide.colors.backgroundLight,
@@ -64,6 +58,7 @@ const Hero = styled(Column)`
 
 const Hemlok = styled('img')`
   margin: 100px 0;
+  max-width: 70%;
 `
 const sized = {
   large: '400px',
@@ -92,34 +87,29 @@ const Bg = () => (
 
 export default () => (
   <ThemeProvider theme={styleguide.colors}>
-    <Background>
-      <Layout>
-        <Hero align="start">
-          <Text> UI Designer & Engineer </Text>
-          <Hemlok src="/static/hemlok.svg" alt="hemlok" />
-        </Hero>
-        <ListTitle
-          title="Product"
-          style={{ position: 'relative', zIndex: 1 }}
-        />
-        <div style={{ position: 'relative' }}>
-          <Bg />
-          <Card title="scoops" link="scoops.io" theme={uiTheme} />
-          <Link href="/battlefy" prefetch>
-            <Card title="battlefy" link="battlefy.com" theme={uiTheme} />
-          </Link>
-          <Card title="vault" link="vault.crucible.gg" theme={uiTheme} />
-        </div>
-        <ListTitle title="UI" />
-        <Card title="goodlord" link="goodlord.co" theme={writingTheme} />
+    <Layout>
+      <Hero align="start">
+        <Text> UI Designer & Engineer </Text>
+        <Hemlok src="/static/hemlok.svg" alt="hemlok" />
+      </Hero>
+      <ListTitle title="Product" style={{ position: 'relative', zIndex: 1 }} />
+      <div style={{ position: 'relative' }}>
+        <Bg />
+        <Card title="scoops" link="scoops.io" theme={uiTheme} />
+        <Link href="/battlefy" prefetch>
+          <Card title="battlefy" link="battlefy.com" theme={uiTheme} />
+        </Link>
+        <Card title="vault" link="vault.crucible.gg" theme={uiTheme} />
+      </div>
+      <ListTitle title="UI" />
+      <Card title="goodlord" link="goodlord.co" theme={writingTheme} />
 
-        <ListTitle title="Libraries" />
-        <Card
-          title="spring-keyframes"
-          link="github.com/hemlok/spring-keyframes"
-          theme={writingTheme}
-        />
-      </Layout>
-    </Background>
+      <ListTitle title="Libraries" />
+      <Card
+        title="spring-keyframes"
+        link="github.com/hemlok/spring-keyframes"
+        theme={writingTheme}
+      />
+    </Layout>
   </ThemeProvider>
 )

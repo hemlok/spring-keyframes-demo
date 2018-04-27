@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'react-emotion'
-import { Layout, Text, Divider } from '../components/styleguide'
+import { Layout, Text, Divider, styleguide } from '../components/styleguide'
+import { Topbar } from '../components'
 import { ThemeProvider } from 'emotion-theming'
 
-const battlefyStyles = {
-  background: '#151B27',
-  primary: '#EB2B44',
-  text: '#FFFFFF',
+const pageTheme = {
+  background: styleguide.colors.forground,
+  primary: styleguide.colors.primary,
+  text: styleguide.colors.blackText,
 }
 
 const Background = styled('div')`
@@ -16,13 +17,21 @@ const Background = styled('div')`
 `
 
 export default () => (
-  <ThemeProvider theme={battlefyStyles}>
+  <ThemeProvider theme={pageTheme}>
     <Background>
-      <Layout>
-        <Text hero serif>
+      <Topbar />
+      <Layout withTopbar>
+        <Text size="title" serif primary>
           battlefy
         </Text>
-        <Divider />
+        <Divider primary />
+        <Text>
+          Mauris dignissim nunc elit, sit amet pretium nisl luctus et. In eu
+          nunc enim. Maecenas sit amet vestibulum nulla. Mauris viverra pretium
+          aliquet. Aliquam erat volutpat.
+        </Text>
+        <a href="https://battlefy.com">battlefy.com</a>
+        <Divider primary />
       </Layout>
     </Background>
   </ThemeProvider>
