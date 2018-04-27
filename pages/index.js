@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { ThemeProvider } from 'emotion-theming'
 import styled, { hydrate, injectGlobal } from 'react-emotion'
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax'
 import { Layout, Text, Column, styleguide } from '../components/styleguide'
 import { ListTitle, Card } from '../components'
 
@@ -21,28 +22,16 @@ injectGlobal`
   * {
     box-sizing: border-box;
   }
-`
 
-const battlefyTheme = {
-  background: '#151B27',
-  primary: styleguide.colors.backgroundLight,
-  text: '#FFFFFF',
-}
+  .parallax-inner {
+    will-change: transform;
+    position: relative;
+    transition: none;
+  }
+`
 
 const uiTheme = {
   background: '#3232CC',
-  primary: styleguide.colors.backgroundLight,
-  text: '#000000',
-}
-
-const goodlordTheme = {
-  background: '#27363A',
-  primary: styleguide.colors.backgroundLight,
-  text: '#000000',
-}
-
-const vaultTheme = {
-  background: '#424242',
   primary: styleguide.colors.backgroundLight,
   text: '#000000',
 }
@@ -79,37 +68,46 @@ const Circle = styled('div')`
 
 const Bg = () => (
   <div>
-    <Circle size="large" style={{ left: '-20%', top: '50px' }} />
-    <Circle size="small" style={{ right: '-40px', top: '-40px' }} />
-    <Circle size="medium" style={{ right: '-20px', top: '300px' }} />
+    <Parallax offsetYMax={'40px'} offsetYMin={'-40px'} tag="figure">
+      <div>
+        <Circle size="large" style={{ left: '-30%', top: '50px' }} />
+        <Circle size="small" style={{ right: '-80px', top: '-40px' }} />
+        <Circle size="medium" style={{ right: '-80px', top: '300px' }} />
+      </div>
+    </Parallax>
   </div>
 )
 
 export default () => (
   <ThemeProvider theme={styleguide.colors}>
-    <Layout>
-      <Hero align="start">
-        <Text> UI Designer & Engineer </Text>
-        <Hemlok src="/static/hemlok.svg" alt="hemlok" />
-      </Hero>
-      <ListTitle title="Product" style={{ position: 'relative', zIndex: 1 }} />
-      <div style={{ position: 'relative' }}>
-        <Bg />
-        <Card title="scoops" link="scoops.io" theme={uiTheme} />
-        <Link href="/battlefy" prefetch>
-          <Card title="battlefy" link="battlefy.com" theme={uiTheme} />
-        </Link>
-        <Card title="vault" link="vault.crucible.gg" theme={uiTheme} />
-      </div>
-      <ListTitle title="UI" />
-      <Card title="goodlord" link="goodlord.co" theme={writingTheme} />
+    <ParallaxProvider>
+      <Layout>
+        <Hero align="start">
+          <Text> UI Designer & Engineer </Text>
+          <Hemlok src="/static/hemlok.svg" alt="hemlok" />
+        </Hero>
+        <ListTitle
+          title="Product"
+          style={{ position: 'relative', zIndex: 1 }}
+        />
+        <div style={{ position: 'relative' }}>
+          <Bg />
+          <Card title="scoops" link="scoops.io" theme={uiTheme} />
+          <Link href="/battlefy" prefetch>
+            <Card title="battlefy" link="battlefy.com" theme={uiTheme} />
+          </Link>
+          <Card title="vault" link="vault.crucible.gg" theme={uiTheme} />
+        </div>
+        <ListTitle title="UI" />
+        <Card title="goodlord" link="goodlord.co" theme={writingTheme} />
 
-      <ListTitle title="Libraries" />
-      <Card
-        title="spring-keyframes"
-        link="github.com/hemlok/spring-keyframes"
-        theme={writingTheme}
-      />
-    </Layout>
+        <ListTitle title="Libraries" />
+        <Card
+          title="spring-keyframes"
+          link="github.com/hemlok/spring-keyframes"
+          theme={writingTheme}
+        />
+      </Layout>
+    </ParallaxProvider>
   </ThemeProvider>
 )
