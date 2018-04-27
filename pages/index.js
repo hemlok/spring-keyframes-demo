@@ -71,8 +71,16 @@ const Bg = () => (
     <Parallax offsetYMax={'40px'} offsetYMin={'-40px'} tag="figure">
       <div>
         <Circle size="large" style={{ left: '-30%', top: '50px' }} />
+      </div>
+    </Parallax>
+    <Parallax offsetYMax={'70px'} offsetYMin={'-70px'} tag="figure">
+      <div>
+        <Circle size="medium" style={{ right: '-60px', top: '300px' }} />
+      </div>
+    </Parallax>
+    <Parallax offsetYMax={'10px'} offsetYMin={'-10px'} tag="figure">
+      <div>
         <Circle size="small" style={{ right: '-80px', top: '-40px' }} />
-        <Circle size="medium" style={{ right: '-80px', top: '300px' }} />
       </div>
     </Parallax>
   </div>
