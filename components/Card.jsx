@@ -1,6 +1,5 @@
 import styled from 'react-emotion'
 import React from 'react'
-import lighten from 'hex-to-rgba'
 import { Column, Text, styleguide } from './styleguide'
 
 const Card = styled(Column)`
@@ -14,10 +13,8 @@ const Card = styled(Column)`
     ${props => (props.light ? props.theme.forground : props.theme.primary)};
   cursor: ${props => (props.onClick ? 'pointer' : 'auto')};
   &:hover {
-    /* transform: scale3d(1.02, 1.02, 1); */
     border-left-color: ${props =>
       !props.light ? props.theme.backgroundLight : props.theme.primary};
-    /* filter: saturate(0); */
   }
 `
 
