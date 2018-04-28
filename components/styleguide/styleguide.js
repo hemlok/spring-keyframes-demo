@@ -1,12 +1,18 @@
 import { css } from 'react-emotion'
 
 export const colors = {
-  text: '#FFFFFF',
   blackText: '#000000',
   background: '#F1B7AC',
   backgroundLight: '#F8D5D7',
   forground: '#FFFFFF',
-  primary: '#00079A',
+  primaryDark: '#00079A',
+  primary: '#3232CC',
+  primaryLight: '#725eff',
+}
+
+export const theme = {
+  ...colors,
+  lightText: colors.backgroundLight,
 }
 
 export const text = {
@@ -56,6 +62,7 @@ export default {
   spacing,
   text,
   colors,
+  theme,
   layouts,
   timingFuncs,
   mobile,
