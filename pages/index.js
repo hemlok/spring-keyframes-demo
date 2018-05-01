@@ -59,7 +59,12 @@ const circleSize = ({ size }) => sized[size]
 
 const Circle = styled('div')`
   border-radius: 100%;
-  background-color: ${styleguide.colors.primary};
+  background-color: ${props =>
+    props.white
+      ? styleguide.colors.backgroundLight
+      : props.light
+        ? styleguide.colors.primaryLight
+        : styleguide.colors.primaryDark};
   width: ${props => circleSize};
   height: ${props => circleSize};
   z-index: 0;
@@ -67,31 +72,26 @@ const Circle = styled('div')`
 `
 
 const Bg = () => (
-  <div>
-    <Parallax offsetYMax={'40px'} offsetYMin={'-40px'} tag="figure">
+  <div style={{ height: '100%' }}>
+    <Parallax offsetYMax={'40px'} offsetYMin={'-40px'} tag="div">
       <div>
-        <Circle size="large" style={{ left: '-30%', top: '50px' }} />
-      </div>
-    </Parallax>
-    <Parallax offsetYMax={'70px'} offsetYMin={'-70px'} tag="figure">
-      <div>
-        <Circle size="medium" style={{ right: '-60px', top: '300px' }} />
-      </div>
-    </Parallax>
-    <Parallax offsetYMax={'10px'} offsetYMin={'-10px'} tag="figure">
-      <div>
-        <Circle size="small" style={{ right: '-80px', top: '-40px' }} />
+        <Circle size="large" style={{ left: '-20%', top: '50px' }} />
+        <Circle size="small" light style={{ right: '-40px', top: '-40px' }} />
+        <Circle size="medium" white style={{ right: '-20px', top: '300px' }} />
+        <Circle size="medium" light style={{ right: '90px', top: '600px' }} />
+        <Circle size="small" white style={{ left: '90px', top: '900px' }} />
+        <Circle size="large" style={{ right: '-10%', top: '850px' }} />
       </div>
     </Parallax>
   </div>
 )
 
 export default () => (
-  <ThemeProvider theme={styleguide.colors}>
+  <ThemeProvider theme={styleguide.theme}>
     <ParallaxProvider>
       <Layout>
         <Hero align="start">
-          <Text> UI Designer & Engineer </Text>
+          <Text black> UI Engineer, Designer, Maker </Text>
           <Hemlok src="/static/hemlok.svg" alt="hemlok" />
         </Hero>
         <ListTitle
@@ -100,21 +100,23 @@ export default () => (
         />
         <div style={{ position: 'relative' }}>
           <Bg />
-          <Card title="scoops" link="scoops.io" theme={uiTheme} />
+          <Card title="scoops" link="scoops.io" />
           <Link href="/battlefy" prefetch>
-            <Card title="battlefy" link="battlefy.com" theme={uiTheme} />
+            <Card title="battlefy" link="battlefy.com" />
           </Link>
-          <Card title="vault" link="vault.crucible.gg" theme={uiTheme} />
+          <Card title="vault" link="vault.crucible.gg" />
         </div>
         <ListTitle title="UI" />
-        <Card title="goodlord" link="goodlord.co" theme={writingTheme} />
+        <Card title="goodlord" light link="goodlord.co" />
+        <Card title="design systems" light link="foo.bar" />
 
         <ListTitle title="Libraries" />
         <Card
           title="spring-keyframes"
+          light
           link="github.com/hemlok/spring-keyframes"
-          theme={writingTheme}
         />
+        <Card title="emotion-box" light link="github.com/hemlok/emotion-box" />
       </Layout>
     </ParallaxProvider>
   </ThemeProvider>
