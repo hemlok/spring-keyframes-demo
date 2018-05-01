@@ -30,17 +30,6 @@ injectGlobal`
   }
 `
 
-const uiTheme = {
-  background: '#3232CC',
-  primary: styleguide.colors.backgroundLight,
-  text: '#000000',
-}
-
-const writingTheme = {
-  background: styleguide.colors.forground,
-  primary: styleguide.colors.primary,
-}
-
 const Hero = styled(Column)`
   margin-top: 10vh;
 `
