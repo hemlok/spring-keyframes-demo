@@ -1,10 +1,13 @@
 import React from 'react'
-import Link from 'next/link'
 import { ThemeProvider } from 'emotion-theming'
 import styled, { hydrate, injectGlobal } from 'react-emotion'
-import { ParallaxProvider, Parallax } from 'react-scroll-parallax'
-import { Layout, Text, Column, styleguide } from '../components/styleguide'
-import { ListTitle, Card } from '../components'
+import {
+  Layout,
+  Divider,
+  Text,
+  Column,
+  styleguide,
+} from '../components/styleguide'
 
 // Adds server generated styles to emotion cache.
 // '__NEXT_DATA__.ids' is set in '_document.js'
@@ -16,7 +19,7 @@ injectGlobal`
   html, body {
     margin: 0;
     background: ${styleguide.colors.background};
-    font-family: Futura, Helvetica, Arial, sans-serif;
+    font-family: Helvetica-Neue, Arial, sans-serif;
     font-size: 14px;
   }
   * {
@@ -32,16 +35,33 @@ injectGlobal`
 
 const Hero = styled(Column)`
   margin-top: 10vh;
+  position: relative;
 `
 
-const Hemlok = styled('img')`
-  margin: 100px 0;
-  max-width: 70%;
+const Title = styled('img')`
+  max-width: 85%;
+  position: relative;
+  z-index: 2;
 `
+
+const Href = styled(Text.withComponent('a'))`
+  margin-top: ${styleguide.spacing.large};
+  border-left: 8px solid ${styleguide.colors.primaryLight};
+  padding-left: ${styleguide.spacing.medium};
+  padding-bottom: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  animation-fill-mode: reverse;
+  &:hover {
+    color: ${styleguide.colors.primaryLight};
+  }
+`
+
 const sized = {
-  large: '400px',
+  large: '360px',
   small: '150px',
-  medium: '200px',
+  medium: '260px',
 }
 
 const circleSize = ({ size }) => sized[size]
@@ -49,8 +69,8 @@ const circleSize = ({ size }) => sized[size]
 const Circle = styled('div')`
   border-radius: 100%;
   background-color: ${props =>
-    props.white
-      ? styleguide.colors.backgroundLight
+    props.primary
+      ? styleguide.colors.primary
       : props.light
         ? styleguide.colors.primaryLight
         : styleguide.colors.primaryDark};
@@ -60,53 +80,54 @@ const Circle = styled('div')`
   position: absolute;
 `
 
-const Bg = () => (
-  <div style={{ height: '100%' }}>
-    <Parallax offsetYMax={'40px'} offsetYMin={'-40px'} tag="div">
-      <div>
-        <Circle size="large" style={{ left: '-20%', top: '50px' }} />
-        <Circle size="small" light style={{ right: '-40px', top: '-40px' }} />
-        <Circle size="medium" white style={{ right: '-20px', top: '300px' }} />
-        <Circle size="medium" light style={{ right: '90px', top: '600px' }} />
-        <Circle size="small" white style={{ left: '90px', top: '900px' }} />
-        <Circle size="large" style={{ right: '-10%', top: '850px' }} />
-      </div>
-    </Parallax>
-  </div>
-)
+const Splash = styled('div')`
+  position: relative;
+  z-index: 1;
+`
 
 export default () => (
   <ThemeProvider theme={styleguide.theme}>
-    <ParallaxProvider>
-      <Layout>
-        <Hero align="start">
-          <Text black> UI Engineer, Designer, Maker </Text>
-          <Hemlok src="/static/hemlok.svg" alt="hemlok" />
-        </Hero>
-        <ListTitle
-          title="Product"
-          style={{ position: 'relative', zIndex: 1 }}
-        />
-        <div style={{ position: 'relative' }}>
-          <Bg />
-          <Card title="scoops" link="scoops.io" />
-          <Link href="/battlefy" prefetch>
-            <Card title="battlefy" link="battlefy.com" />
-          </Link>
-          <Card title="vault" link="vault.crucible.gg" />
-        </div>
-        <ListTitle title="UI" />
-        <Card title="goodlord" light link="goodlord.co" />
-        <Card title="design systems" light link="foo.bar" />
-
-        <ListTitle title="Libraries" />
-        <Card
-          title="spring-keyframes"
-          light
-          link="github.com/hemlok/spring-keyframes"
-        />
-        <Card title="emotion-box" light link="github.com/hemlok/emotion-box" />
-      </Layout>
-    </ParallaxProvider>
+    <Layout>
+      <Hero align="start">
+        <Splash>
+          <Circle
+            light
+            size="small"
+            style={{
+              left: '80px',
+              top: '40px',
+              zIndex: 1,
+            }}
+          />
+          <Circle
+            style={{
+              left: '-200px',
+              top: '-50px',
+            }}
+            size="large"
+          />
+          <Circle
+            style={{
+              left: '-80px',
+              top: '100px',
+              zIndex: 2,
+            }}
+            primary
+            size="medium"
+          />
+        </Splash>
+        <Title src="/static/spring-keyframes.svg" alt="spring keyframes" />
+        <Divider style={{ zIndex: 2 }} />
+        <Text>
+          Sometimes running spring animations in javascript with libraries like{' '}
+          <b>React-Motion</b> on the web cause ‘jank’ when the main thread is
+          busy. <b>Spring-Keyframes</b> solves this problem by generating css
+          keyframe animations that run natively.
+        </Text>
+        <Href href="https://github.com/hemlok/spring-keyframes">
+          <b>github.com/hemlok/spring-keyframes</b>
+        </Href>
+      </Hero>
+    </Layout>
   </ThemeProvider>
 )

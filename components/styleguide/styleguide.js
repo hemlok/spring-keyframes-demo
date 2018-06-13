@@ -1,9 +1,8 @@
 import { css } from 'react-emotion'
 
 export const colors = {
-  blackText: '#000000',
-  background: '#F1B7AC',
-  backgroundLight: '#F8D5D7',
+  text: '#ffffff',
+  background: '#1C1C1C',
   forground: '#FFFFFF',
   primaryDark: '#00079A',
   primary: '#3232CC',
@@ -12,11 +11,11 @@ export const colors = {
 
 export const theme = {
   ...colors,
-  lightText: colors.backgroundLight,
+  lightText: colors.text,
 }
 
 export const text = {
-  paragraph: '1.6rem',
+  paragraph: '1.7rem',
   subtext: '1rem',
   subtitle: '2rem',
   title: '4rem',
@@ -25,10 +24,10 @@ export const text = {
 
 export const font = {
   serif: 'nimbus-roman, Georgia, serif',
-  sansSerif: 'Futura Pt, Futura, sans-serif',
+  sansSerif: 'Helvetica Neue, sans-serif',
 }
 
-export const contentMaxWidth = 800
+export const contentMaxWidth = 740
 export const layouts = {
   content: css`
     margin: 0 auto;
@@ -40,7 +39,7 @@ export const layouts = {
 export const spacing = {
   small: '12px',
   medium: '20px',
-  large: '28px',
+  large: '40px',
 }
 
 export const timingFuncs = {
