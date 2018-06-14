@@ -15,7 +15,7 @@ export const theme = {
 }
 
 export const text = {
-  paragraph: '1.7rem',
+  paragraph: '1.6rem',
   subtext: '1rem',
   subtitle: '2rem',
   title: '4rem',
@@ -27,7 +27,7 @@ export const font = {
   sansSerif: 'Helvetica Neue, sans-serif',
 }
 
-export const contentMaxWidth = 740
+export const contentMaxWidth = 700
 export const layouts = {
   content: css`
     margin: 0 auto;
