@@ -27,7 +27,7 @@ export const font = {
   sansSerif: 'Helvetica Neue, sans-serif',
 }
 
-export const contentMaxWidth = 700
+export const contentMaxWidth = 740
 export const layouts = {
   content: css`
     margin: 0 auto;
