@@ -26,6 +26,7 @@ injectGlobal`
     background: ${styleguide.colors.background};
     font-family: Helvetica-Neue, Arial, sans-serif;
     font-size: 14px;
+    overflow-x: hidden;
     @media only screen and (max-width: 800px) {
       font-size: 10px;
     }
@@ -114,7 +115,9 @@ const Circle = styled('div')`
   height: ${props => circleSize};
   z-index: 0;
   position: absolute;
-  animation: ${springIn} 3000ms, ${fadeIn} 500ms;
+  animation: ${props => (props.animation ? props.animation : springIn)} 3000ms,
+    ${fadeIn} 500ms;
+  animation-delay: ${props => (props.delay ? props.delay : '0ms')};
   animation-fill-mode: both;
   animation-iteration-count: 1;
 `
@@ -128,42 +131,39 @@ const Group = ({ animation }) => (
   <div>
     <Circle
       light
+      animation={animation}
       size="small"
+      delay={'400ms'}
       style={{
         right: '5.5rem',
         top: '2rem',
         zIndex: 3,
-        animation: `${animation} 5000ms, ${fadeIn} 500ms`,
-        animationFillMode: 'both',
-        animationDelay: '400ms',
       }}
     />
     <Circle
       primary
+      animation={animation}
       size="large"
       style={{
         right: '-14rem',
         top: '-6rem',
-        animation: `${animation} 5000ms, ${fadeIn} 500ms`,
-        animationFillMode: 'both',
       }}
     />
     <Circle
       size="medium"
+      delay="200ms"
+      animation={animation}
       style={{
         right: '-5.7rem',
         top: '7rem',
         zIndex: 2,
-        animation: `${animation} 5000ms, ${fadeIn} 500ms`,
-        animationFillMode: 'both',
-        animationDelay: '200ms',
       }}
     />
   </div>
 )
 
 const scope = { styled, springKeyframes: spring, Animation: Group }
-const code = `const springRight = springKeyframes({
+const code = `const springIn = springKeyframes({
   from: {
     scale: 0.8,
     x: 100,
@@ -179,7 +179,7 @@ const code = `const springRight = springKeyframes({
 })
 
 render(
-  <Animation animation={springRight}/>
+  <Animation animation={springIn}/>
 )
 `
 
@@ -199,7 +199,7 @@ const Editor = styled(LiveEditor)`
   padding: 0 !important;
   background-color: transparent !important;
   color: ${styleguide.colors.text};
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 `
 
 export default () => (
@@ -210,11 +210,11 @@ export default () => (
           <Circle
             light
             size="small"
+            delay="400ms"
             style={{
               left: '5.5rem',
               top: '2.8rem',
               zIndex: 1,
-              animationDelay: '400ms',
             }}
           />
           <Circle
@@ -229,8 +229,8 @@ export default () => (
               left: '-5.7rem',
               top: '7.14rem',
               zIndex: 2,
-              animationDelay: '200ms',
             }}
+            delay="200ms"
             primary
             size="medium"
           />
@@ -257,11 +257,12 @@ export default () => (
         <Divider style={{ zIndex: 2 }} />
         <Live scope={scope} code={code} noInline={true}>
           <Row align="center" justify="space-between">
-            <Editor />
+            <Editor style={{ zIndex: 3 }} />
             <Preview />
           </Row>
           <LiveError />
         </Live>
+        <Space size="large" />
         <Space size="large" />
       </Hero>
     </Layout>
