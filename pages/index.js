@@ -2,7 +2,7 @@ import { ThemeProvider } from 'emotion-theming'
 import React from 'react'
 import styled, { hydrate, injectGlobal, keyframes } from 'react-emotion'
 import spring from 'spring-keyframes'
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
+import { LiveProvider, LiveEditor, LivePreview } from 'react-live'
 
 import {
   Layout,
@@ -115,7 +115,8 @@ const Circle = styled('div')`
   height: ${props => circleSize};
   z-index: 0;
   position: absolute;
-  animation: ${props => (props.animation ? props.animation : springIn)} 3000ms,
+  animation: ${props => (props.animation ? props.animation : springIn)}
+      ${props => (props.duration ? props.duration : '3000ms')},
     ${fadeIn} 500ms;
   animation-delay: ${props => (props.delay ? props.delay : '0ms')};
   animation-fill-mode: both;
@@ -127,35 +128,38 @@ const Splash = styled('div')`
   z-index: 1;
 `
 
-const Group = ({ animation }) => (
+const Group = ({ animation, duration }) => (
   <div>
     <Circle
       light
       animation={animation}
+      duration={duration}
       size="small"
       delay={'400ms'}
       style={{
         right: '5.5rem',
-        top: '2rem',
+        top: '4rem',
         zIndex: 3,
       }}
     />
     <Circle
       primary
       animation={animation}
+      duration={duration}
       size="large"
       style={{
         right: '-14rem',
-        top: '-6rem',
+        top: '-4rem',
       }}
     />
     <Circle
       size="medium"
       delay="200ms"
       animation={animation}
+      duration={duration}
       style={{
         right: '-5.7rem',
-        top: '7rem',
+        top: '9rem',
         zIndex: 2,
       }}
     />
@@ -163,23 +167,19 @@ const Group = ({ animation }) => (
 )
 
 const scope = { styled, springKeyframes: spring, Animation: Group }
-const code = `const springIn = springKeyframes({
-  from: {
-    scale: 0.8,
-    x: 100,
-  },
-  to: {
-    scale: 1,
-    x: 0
-  }
-}, {
+const code = `const options = {
   stiffness: 0.9,
   damping: 0.2,
   precision: 4,
-})
+}
+
+const animation = springKeyframes({
+  from: { scale: 0.8, x: 100, },
+  to: { scale: 1, x: 0 }
+}, options)
 
 render(
-  <Animation animation={springIn}/>
+  <Animation animation={animation} duration="5000ms"/>
 )
 `
 
@@ -241,7 +241,7 @@ export default () => (
           Sometimes running spring animations in javascript with libraries like{' '}
           <b>React-Motion</b> on the web cause ‘jank’ when the main thread is
           busy. <b>Spring-Keyframes</b> solves this problem by generating css
-          keyframe animations that run natively. No <b>RAF loop</b> required.
+          animations that run natively. No <b>RAF loop</b> required.
         </Text>
         <Href href="https://github.com/hemlok/spring-keyframes">
           <b>github.com/hemlok/spring-keyframes</b>
@@ -255,14 +255,70 @@ export default () => (
           your app with any tool you see fit.
         </Text>
         <Divider style={{ zIndex: 2 }} />
+        <Text>
+          <b>Try it for yourself!</b>
+        </Text>
+        <Space size="large" />
         <Live scope={scope} code={code} noInline={true}>
           <Row align="center" justify="space-between">
             <Editor style={{ zIndex: 3 }} />
             <Preview />
           </Row>
-          <LiveError />
         </Live>
         <Space size="large" />
+        <Divider style={{ zIndex: 2 }} />
+        <Text>
+          <b>Why choose Spring-Keyframes?</b>
+        </Text>
+        <Space size="large" />
+        <Text>
+          You don't want to use React. <b>Spring-Keyframes</b> is totally
+          framework agnostic. You don't need to use css-in-js. <b>Scoops</b>{' '}
+          uses it with <b>Preact</b> to generate all the motion for the{' '}
+          <b>Scoops</b> widget.
+        </Text>
+        <Href href="https://scoops.io">
+          <b>scoops.io</b>
+        </Href>
+        <Space size="large" />
+        <Text>
+          You want guaranteed 60fps even with a busy main thread. Javascript
+          only initiates the animation process by creating the animation and
+          applying it to your DOM. This means it will run at 60fps on startup,
+          or when other complex processes are running.
+        </Text>
+        <Space size="large" />
+        <Divider style={{ zIndex: 2 }} />
+        <Text>
+          <b>There are some limitations...</b>
+        </Text>
+        <Space size="large" />
+        <Text>
+          First, <b>Spring-Keyframes</b> is not good at animating to one state,
+          and then animating back to the original state. You can do it, but due
+          to the nature of css animations, it's not as easy as it could be.
+          <br />
+          <br />
+          Second, unlike a true spring animation, whose length is dictate by
+          physics, you must set the length of your spring animation. The length
+          of the css animation is a key value to play with when creating your
+          animation.
+          <br />
+          <br />
+          Finally, <b>Spring-Keyframes</b> is limited by the options you can
+          apply to a css animation. <b>animation-fill-mode</b> generally needs
+          to be set to <b>both</b>, and you should avoid setting an easing
+          funciton!
+        </Text>
+        <Space size="large" />
+        <Divider style={{ zIndex: 2 }} />
+        <Text>
+          If you have any questions feel free to reach out to me on{' '}
+          <b>Twitter</b> or in issues on <b>Github</b>!
+        </Text>
+        <Href href="https://twitter.com/hemlok_">
+          <b>twitter.com/hemlok_</b>
+        </Href>
         <Space size="large" />
       </Hero>
     </Layout>
