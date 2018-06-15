@@ -200,6 +200,8 @@ const Editor = styled(LiveEditor)`
   background-color: transparent !important;
   color: ${styleguide.colors.text};
   font-size: 1.4rem;
+  position: relative;
+  z-index: 4;
 `
 
 export default () => (
