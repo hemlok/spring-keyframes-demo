@@ -279,7 +279,7 @@ export default () => (
           uses it with <b>Preact</b> to generate all the motion for the{' '}
           <b>Scoops</b> widget.
         </Text>
-        <Href href="https://scoops.io">
+        <Href href="https://scoops.netlify.com">
           <b>scoops.io</b>
         </Href>
         <Space size="large" />
